@@ -1,8 +1,9 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { deleteInvoice, getInvoice } from "../data"
 
 export default function Invoice () {
   const navigate = useNavigate()
+  const location = useLocation()
   const {invoiceId} = useParams()
   const {number, name, amount, due} = getInvoice(parseInt(invoiceId, 10))
   return (
@@ -15,7 +16,7 @@ export default function Invoice () {
       <p>
         <button onClick={e => {
           deleteInvoice(number);
-          navigate(`/invoices`)
+          navigate(`/invoices${location.search}`)
         }}>Delete</button>
       </p>
     </main>
